@@ -1899,6 +1899,17 @@
       audio.play().catch(e => console.log("播放失败，可能浏览器自动播放限制:", e));
     }, 5000);
 
+    // 手机横屏自动全屏
+    window.addEventListener('orientationchange', () => {
+      if (IS_MOBILE && Math.abs(window.orientation) === 90) {  // 横屏
+        setTimeout(() => {  // 延迟一点，确保方向稳定
+          if (fullscreenEnabled() && !isFullscreen()) {
+            requestFullscreen();
+          }
+        }, 500);
+      }
+    });
+
   </script>
 
   <audio id="bgm" loop>
